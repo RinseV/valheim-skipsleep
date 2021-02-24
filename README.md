@@ -1,3 +1,5 @@
+![Skip Sleep](https://raw.githubusercontent.com/RinseV/valheim-skipsleep/master/icon.png)
+
 # Skip Sleep
 A simple server-side (or client-side) mod that allows players to skip the night (by sleeping) when only a part of the online users are sleeping. Inspired by the Minecraft [Morpheus](https://www.curseforge.com/minecraft/mc-mods/morpheus) mod.
 
