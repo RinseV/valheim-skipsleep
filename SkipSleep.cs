@@ -4,10 +4,11 @@ using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using System.IO;
+using System;
 
 namespace ModSkipSleepValheim
 {
-    [BepInPlugin("com.rinsev.skipsleep", "ModSkipSleepValheim", "1.0.0.0")]
+    [BepInPlugin("com.rinsev.skipsleep", "ModSkipSleepValheim", "1.0.2")]
     [BepInProcess("valheim.exe")]
     [BepInProcess("valheim_server.exe")]
     [HarmonyPatch]
@@ -20,6 +21,7 @@ namespace ModSkipSleepValheim
 
         private static ConfigFile configFile = new ConfigFile(Path.Combine(Paths.ConfigPath, "SkipSleep.cfg"), true);
         private static ConfigEntry<double> ratio = configFile.Bind("General", "ratio", 0.5, "Threshold of ratio of players that need to be sleeping, must be > 0");
+        private static ConfigEntry<bool> message = configFile.Bind("General", "showMessage", true, "Show a continuous message of the amount of players currently sleeping (if > 0)");
 
         private void Awake()
         {
@@ -54,9 +56,23 @@ namespace ModSkipSleepValheim
                     count++;
             }
 
-            double sleepRatio = (double) count / allCharacterZdos.Count;
+            // Calculate current ratio of people sleeping
+            double sleepRatio = (double)count / allCharacterZdos.Count;
+            
+            // If showMessage is true
+            if (message.Value)
+            {
+                // If people are sleeping
+                if (count >= 1)
+                {
+                    foreach (ZDO zdo in allCharacterZdos)
+                    {
+                        // Send message to everyone at everyone's position
+                        ZRoutedRpc.instance.InvokeRoutedRPC(ZRoutedRpc.Everybody, "ChatMessage", zdo.GetPosition(), 2, "SkipSleep", $"{count}/{allCharacterZdos.Count} sleeping ({Math.Round(sleepRatio * 100)} %)");
+                    }
+                }
+            }
 
-            //FOR DEBUGGING ONLY
             //UnityEngine.Debug.Log($"Players sleeping: {count}");
             //UnityEngine.Debug.Log($"Ratio of players sleeping: {sleepRatio}");
             //UnityEngine.Debug.Log($"Threshold needed: {ratio.Value}");
