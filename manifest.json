@@ -1,6 +1,6 @@
 {
     "name": "SkipSleep",
-    "version_number": "1.0.1",
+    "version_number": "1.0.4",
     "website_url": "https://github.com/RinseV/valheim-skipsleep",
     "description": "Mod that allows players to skip the night when only part of the online users are sleeping",
     "dependencies": [

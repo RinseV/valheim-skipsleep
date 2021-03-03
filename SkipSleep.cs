@@ -30,7 +30,7 @@ namespace ModSkipSleepValheim
 
         private void OnDestroy()
         {
-            harmony.UnpatchAll();
+            harmony.UnpatchSelf();
         }
 
         [HarmonyPrefix]

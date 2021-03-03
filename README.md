@@ -26,6 +26,10 @@ This mod works both as a server-side only mod or as a client-side mod if you are
 https://github.com/Measurity/ModTemplateValheim - Mod template.
 
 ## Changelog
+- 1.0.4:
+  - Removed unused code
+- 1.0.3:
+  - Fixed UnpatchAll warning
 - 1.0.2:
   - Added toggleable info message that shows how many players are currently sleeping (default on)
 - 1.0.1:
