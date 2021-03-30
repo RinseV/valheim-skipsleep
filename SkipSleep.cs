@@ -8,7 +8,7 @@ using System;
 
 namespace ModSkipSleepValheim
 {
-    [BepInPlugin("com.rinsev.skipsleep", "ModSkipSleepValheim", "1.0.2")]
+    [BepInPlugin("com.rinsev.skipsleep", "ModSkipSleepValheim", "1.0.5")]
     [HarmonyPatch]
     public class Mod : BaseUnityPlugin
     {
